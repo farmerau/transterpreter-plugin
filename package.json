@@ -1,0 +1,18 @@
+{
+  "name": "transterpreter-plugin",
+  "main": "./lib/transterpreter-plugin",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "keywords": [
+  ],
+  "activationCommands": {
+    "atom-workspace": "transterpreter-plugin:toggle"
+  },
+  "repository": "https://github.com/atom/transterpreter-plugin",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}
