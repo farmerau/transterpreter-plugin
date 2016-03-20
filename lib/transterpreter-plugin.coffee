@@ -15,6 +15,7 @@ module.exports = TransterpreterPlugin =
 
     # Register command that toggles this view
     @subscriptions.add atom.commands.add 'atom-workspace', 'transterpreter-plugin:toggle': => @toggle()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'transterpreter-plugin:doWork' : => @doWork()
 
   deactivate: ->
     @modalPanel.destroy()
@@ -27,10 +28,13 @@ module.exports = TransterpreterPlugin =
   toggle: ->
     console.log 'TransterpreterPlugin was toggled!'
 
-    if @modalPanel.isVisible()
-      @modalPanel.hide()
-    else
-      @modalPanel.show()
+  doWork: ->
+        if @modalPanel.isVisible()
+          @modalPanel.hide()
+        else
+          @modalPanel.show()
+
+
   consumeStatusBar: (statusBar) ->
     ##This functions purpose is to make a clickable transterpreter logo
     ##that will send the code to the compiler and do the arduino work.
@@ -44,12 +48,12 @@ module.exports = TransterpreterPlugin =
      #We need this icon to actually do something, so I'm going with href to function call.
      transtrprtrActionable = document.createElement('a')
      transtrprtrActionable.setAttribute('href', "#")
+     clickHandler = => atom.commands.dispatch(atom.views.getView(atom.workspace.getActiveTextEditor()), 'transterpreter-plugin:doWork')
+
      #function doWork() may be renamed, currently doesn't actually do any work.
-     transtrprtrActionable.setAttribute('onClick', "doWork();")
+     transtrprtrActionable.addEventListener("click", clickHandler)
      #appendChild() is how we're going to insert the image into the link.
      transtrprtrActionable.appendChild(transtrprtrLogo)
 
      ##This actualyl does the work involved in appending it to the statusbar.
      @statusBarTile = statusBar.addRightTile(item: transtrprtrActionable, priority: 999)
-
-  doWork: ->
