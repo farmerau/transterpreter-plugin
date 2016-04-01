@@ -26,7 +26,18 @@ module.exports = TransterpreterPlugin =
     transterpreterPluginViewState: @transterpreterPluginView.serialize()
 
   toggle: ->
+    https = require 'https'
+
+    options =
+      host:'45.55.232.116'
+      port:'9000'
+      path:'/board-choices.rkt'
+
+    req  = https.get options, (res) ->
+      console.log res.statusCode;
+
     console.log 'TransterpreterPlugin was toggled!'
+    @modalPanel.hide()
 
   doWork: ->
         if @modalPanel.isVisible()
