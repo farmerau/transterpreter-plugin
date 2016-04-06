@@ -38,7 +38,7 @@ module.exports = TransterpreterPlugin =
     http.get options, (res) ->
       console.log res
       res.on 'data', (chunk) ->
-      console.log (chunk)
+        console.log (chunk.toString())
     @modalPanel.hide()
 
   doWork: ->
