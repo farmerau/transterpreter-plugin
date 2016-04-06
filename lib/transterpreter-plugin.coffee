@@ -26,20 +26,23 @@ module.exports = TransterpreterPlugin =
     transterpreterPluginViewState: @transterpreterPluginView.serialize()
 
   toggle: ->
-    https = require 'https'
+    http = require('http')
 
-    options =
-      host:'45.55.232.116'
-      port:'9000'
-      path:'/board-choices.rkt'
-
-    req  = https.get options, (res) ->
-      console.log res.statusCode;
-
-    console.log 'TransterpreterPlugin was toggled!'
+    options = {
+      hostname:'45.55.232.116', #Transterpreter server IP
+      port:9000, #Port
+      path:'/board-choices.rkt' #Hash map containing available board choices
+    }
+#nothing happens here... blank line
+    console.log (options)
+    http.get options, (res) ->
+      console.log res
+      res.on 'data', (chunk) ->
+      console.log (chunk)
     @modalPanel.hide()
 
   doWork: ->
+    #create modal
         if @modalPanel.isVisible()
           @modalPanel.hide()
         else
