@@ -1,4 +1,5 @@
 TransterpreterPluginView = require './transterpreter-plugin-view'
+ListOfBoards = "";
 {CompositeDisposable} = require 'atom'
 
 module.exports = TransterpreterPlugin =
@@ -34,11 +35,9 @@ module.exports = TransterpreterPlugin =
       path:'/board-choices.rkt' #Hash map containing available board choices
     }
 #nothing happens here... blank line
-    console.log (options)
     http.get options, (res) ->
-      console.log res
       res.on 'data', (chunk) ->
-        console.log (chunk.toString())
+        ListOfBoards = chunk.toString()
     @modalPanel.hide()
 
   doWork: ->
