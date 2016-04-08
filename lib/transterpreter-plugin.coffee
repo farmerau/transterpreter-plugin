@@ -1,5 +1,5 @@
 TransterpreterPluginView = require './transterpreter-plugin-view'
-ListOfBoards = "";
+Settings = require './settings.coffee'
 {CompositeDisposable} = require 'atom'
 
 module.exports = TransterpreterPlugin =
@@ -28,18 +28,13 @@ module.exports = TransterpreterPlugin =
 
   toggle: ->
     http = require('http')
-
-    options = {
-      hostname:'45.55.232.116', #Transterpreter server IP
-      port:9000, #Port
-      path:'/board-choices.rkt' #Hash map containing available board choices
-    }
-#nothing happens here... blank line
-    http.get options, (res) ->
+    window.options.path='/board-choices.rkt'
+    http.get window.options, (res) ->
       res.on 'data', (chunk) ->
-        ListOfBoards = chunk.toString()
+        window.ListOfBoards = chunk.toString()
     @modalPanel.hide()
-
+    #blank line. Nothing happens here.
+    #TODO: We need to add functionality to remove transterpreter icon.
   doWork: ->
     #create modal
         if @modalPanel.isVisible()
