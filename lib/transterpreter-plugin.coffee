@@ -39,6 +39,7 @@ module.exports = TransterpreterPlugin =
   doWork: ->
     #create modal
         console.log(@modalPanel)
+        @transterpreterPluginView.setBoards(window.ListOfBoards)
         if @modalPanel.isVisible()
           @modalPanel.hide()
         else
