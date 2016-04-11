@@ -23,6 +23,8 @@ module.exports = TransterpreterPlugin =
     @modalPanel.destroy()
     @subscriptions.dispose()
     @transterpreterPluginView.destroy()
+    @statusBarTile?.destroy()
+    @statusBarTile = null
 
   serialize: ->
     transterpreterPluginViewState: @transterpreterPluginView.serialize()
@@ -34,16 +36,20 @@ module.exports = TransterpreterPlugin =
       res.on 'data', (chunk) ->
         window.ListOfBoards = chunk.toString()
     @modalPanel.hide()
+    if(@statusBarTile)
+      if (@statusBarTile.item.hidden)
+        @statusBarTile.item.hidden= false
+      else
+        @statusBarTile.item.hidden= true
     #blank line. Nothing happens here.
     #TODO: We need to add functionality to remove transterpreter icon.
   doWork: ->
     #create modal
-        console.log(@modalPanel)
-        @transterpreterPluginView.setBoards(window.ListOfBoards)
-        if @modalPanel.isVisible()
-          @modalPanel.hide()
-        else
-          @modalPanel.show()
+    @transterpreterPluginView.setBoards(window.ListOfBoards)
+    if @modalPanel.isVisible()
+      @modalPanel.hide()
+    else
+      @modalPanel.show()
 
   consumeStatusBar: (statusBar) ->
     ##This functions purpose is to make a clickable transterpreter logo
