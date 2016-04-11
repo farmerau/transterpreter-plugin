@@ -1,5 +1,7 @@
 TransterpreterPluginView = require './transterpreter-plugin-view'
 Settings = require './settings.coffee'
+
+
 {CompositeDisposable} = require 'atom'
 
 module.exports = TransterpreterPlugin =
@@ -10,7 +12,6 @@ module.exports = TransterpreterPlugin =
   activate: (state) ->
     @transterpreterPluginView = new TransterpreterPluginView(state.transterpreterPluginViewState)
     @modalPanel = atom.workspace.addModalPanel(item: @transterpreterPluginView.getElement(), visible: false)
-
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
     @subscriptions = new CompositeDisposable
 
@@ -37,11 +38,11 @@ module.exports = TransterpreterPlugin =
     #TODO: We need to add functionality to remove transterpreter icon.
   doWork: ->
     #create modal
+        console.log(@modalPanel)
         if @modalPanel.isVisible()
           @modalPanel.hide()
         else
           @modalPanel.show()
-
 
   consumeStatusBar: (statusBar) ->
     ##This functions purpose is to make a clickable transterpreter logo
