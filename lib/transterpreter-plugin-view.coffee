@@ -6,15 +6,20 @@ class TransterpreterPluginView
     # Create root element
     @element = document.createElement('div')
     @element.classList.add('transterpreter-plugin')
+    #boardSelect dropdown
     @dropdown = document.createElement('select')
     @dropdown.classList.add('dropdown')
+    #projectSelect dropdown
+    @dropdown1 = document.createElement('select')
+    @dropdown1.classList.add('dropdown')
 
     # Create message element
     message = document.createElement('div')
-    message.textContent = window.listOfBoards
+    message.textContent = window.listOfBoard
     message.classList.add('message')
     @element.appendChild(message)
     @element.appendChild(@dropdown)
+    @element.appendChild(@dropdown1)
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
@@ -35,3 +40,12 @@ class TransterpreterPluginView
       if (temp[0] != '')
         option.attr('value', temp[1]).text(temp[0])
         $(@dropdown).append(option)
+
+  setProject: (projectDirs) ->
+    $(@dropdown1).empty()
+    for projDir in projectDirs
+      temp = projDir.split("/")
+      option = $('<option>')
+      [..., last] = temp #CoffeeScript array destructuring http://coffeescript.org/#destructuring
+      option.attr('value', last).text(last)
+      $(@dropdown1).append(option)
