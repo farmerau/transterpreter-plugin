@@ -42,7 +42,6 @@ module.exports = TransterpreterPlugin =
       else
         @statusBarTile.item.hidden= true
     #blank line. Nothing happens here.
-    #TODO: We need to add functionality to remove transterpreter icon.
   doWork: ->
     #create modal
     for dir in atom.project.rootDirectories
