@@ -50,6 +50,8 @@ module.exports = TransterpreterPlugin =
       @modalPanel.hide()
     else
       @modalPanel.show()
+    for dir in atom.project.rootDirectories
+      console.log(dir.path)
 
   consumeStatusBar: (statusBar) ->
     ##This functions purpose is to make a clickable transterpreter logo

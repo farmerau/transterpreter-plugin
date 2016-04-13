@@ -1,4 +1,4 @@
-window.ListOfBoards = "Austin";
+window.ListOfBoards = "";
 window.transterpreterServer = '45.55.232.116';
 window.transterpreterPort = 9000;
 window.options = {
