@@ -45,14 +45,14 @@ module.exports = TransterpreterPlugin =
     #TODO: We need to add functionality to remove transterpreter icon.
   doWork: ->
     #create modal
+    for dir in atom.project.rootDirectories
+      window.projectDirs.push(dir.path)
+    @transterpreterPluginView.setProject(window.projectDirs)
     @transterpreterPluginView.setBoards(window.ListOfBoards)
     if @modalPanel.isVisible()
       @modalPanel.hide()
     else
       @modalPanel.show()
-    for dir in atom.project.rootDirectories
-      console.log(dir.path)
-
   consumeStatusBar: (statusBar) ->
     ##This functions purpose is to make a clickable transterpreter logo
     ##that will send the code to the compiler and do the arduino work.
