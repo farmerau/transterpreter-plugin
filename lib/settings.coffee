@@ -6,3 +6,4 @@ window.options = {
   port: window.transterpreterPort, #Port
   path:''
 }
+window.projectDirs = [];
