@@ -42,11 +42,10 @@ module.exports = TransterpreterPlugin =
       else
         @statusBarTile.item.hidden= true
     #blank line. Nothing happens here.
-  doWork: ->
+  doWork: ->#executes everytime the modal appears. Keeps modal up-to-date.
     #create modal
-    for dir in atom.project.rootDirectories
-      window.projectDirs.push(dir.path)
-    @transterpreterPluginView.setProject(window.projectDirs)
+    console.log(atom.project)
+    @transterpreterPluginView.setProject(atom.project.getPaths())
     @transterpreterPluginView.setBoards(window.ListOfBoards)
     if @modalPanel.isVisible()
       @modalPanel.hide()

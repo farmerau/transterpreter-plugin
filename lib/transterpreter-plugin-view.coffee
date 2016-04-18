@@ -43,9 +43,12 @@ class TransterpreterPluginView
 
   setProject: (projectDirs) ->
     $(@dropdown1).empty()
+    choose = $('<option>')
+    choose.attr('value', "").text("Choose a project")
+    $(@dropdown1).append(choose)
     for projDir in projectDirs
       temp = projDir.split("/")
       option = $('<option>')
       [..., last] = temp #CoffeeScript array destructuring http://coffeescript.org/#destructuring
-      option.attr('value', last).text(last)
+      option.attr('value', projDir).text(last)
       $(@dropdown1).append(option)
