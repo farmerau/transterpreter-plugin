@@ -44,9 +44,9 @@ module.exports = TransterpreterPlugin =
     #blank line. Nothing happens here.
   doWork: ->#executes everytime the modal appears. Keeps modal up-to-date.
     #create modal
-    console.log(atom.project)
     @transterpreterPluginView.setProject(atom.project.getPaths())
     @transterpreterPluginView.setBoards(window.ListOfBoards)
+
     if @modalPanel.isVisible()
       @modalPanel.hide()
     else
