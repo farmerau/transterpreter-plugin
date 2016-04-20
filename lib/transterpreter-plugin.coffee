@@ -1,6 +1,6 @@
 TransterpreterPluginView = require './transterpreter-plugin-view'
 Settings = require './settings.coffee'
-
+fs = require 'fs-plus'
 
 {CompositeDisposable} = require 'atom'
 
