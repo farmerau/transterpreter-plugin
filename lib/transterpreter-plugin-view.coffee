@@ -1,5 +1,6 @@
 Settings = require "./settings.coffee"
 {SelectListView, $, $$} = require 'atom-space-pen-views'
+fs = require 'fs-plus'
 module.exports =
 class TransterpreterPluginView
   constructor: (serializedState) ->
@@ -41,6 +42,14 @@ class TransterpreterPluginView
         option.attr('value', temp[1]).text(temp[0])
         $(@dropdown).append(option)
 
+  generatePayload: (path, root) ->
+    if path != ""
+      files = fs.listTreeSync(path)
+      payload = []
+      for filepath in files
+        relpath = filepath.split(path)[1];
+        console.log(relpath)
+
   setProject: (projectDirs) ->
     $(@dropdown1).empty()
     choose = $('<option>')
@@ -52,3 +61,4 @@ class TransterpreterPluginView
       [..., last] = temp #CoffeeScript array destructuring http://coffeescript.org/#destructuring
       option.attr('value', projDir).text(last)
       $(@dropdown1).append(option)
+    $(@dropdown1).on("change", => @generatePayload($(@dropdown1).find(":selected").val(), $(@dropdown1).find(":selected").text()))
