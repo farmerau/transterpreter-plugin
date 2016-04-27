@@ -30,6 +30,7 @@ module.exports = TransterpreterPlugin =
     transterpreterPluginViewState: @transterpreterPluginView.serialize()
 
   toggle: ->
+    @transterpreterPluginView.unbindEventHandler()
     http = require('http')
     window.options.path='/board-choices.rkt'
     http.get window.options, (res) ->

@@ -24,8 +24,8 @@ class TransterpreterPluginView
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
+    # Tear down any state and detach
 
-  # Tear down any state and detach
   destroy: ->
     @element.remove()
 
@@ -44,11 +44,29 @@ class TransterpreterPluginView
 
   generatePayload: (path, root) ->
     if path != ""
-      files = fs.listTreeSync(path)
-      payload = []
-      for filepath in files
-        relpath = filepath.split(path)[1];
-        console.log(relpath)
+      contents = "files"
+      fileContents = "contents"
+      tempDirs = atom.workspace.getActivePaneItem()?.buffer.file?.path.split('/')
+      [..., mainFile] = tempDirs
+      window.payload["main"] = btoa(mainFile)
+      window.payload["ardu"] = btoa($(@dropdown).find(":selected").val())
+      window.payload[contents] = {}
+      window.payload[fileContents] = []
+      files = fs.listSync(path, window.acceptedFileTypes)
+      for file in files
+        filename = file.split('/')
+        [..., last] = filename
+        temp = last
+        tempObj = {}
+        tempObj[temp] = btoa(fs.readFileSync(file, "utf-8"))
+        window.payload[fileContents].push(temp)
+        window.payload[contents][temp] = tempObj[temp]
+      console.log(window.payload)
+
+
+  unbindEventHandler: ->
+    $(@dropdown1).unbind();
+
 
   setProject: (projectDirs) ->
     $(@dropdown1).empty()

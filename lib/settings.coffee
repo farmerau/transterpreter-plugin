@@ -7,3 +7,5 @@ window.options = {
   path:''
 }
 window.projectDirs = [];
+window.acceptedFileTypes = [".occ", ".inc", ".mod"];
+window.payload = {}
