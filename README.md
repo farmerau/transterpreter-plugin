@@ -13,6 +13,7 @@ The transterpreter-plugin is an Atom plugin designed to make development with/fo
 ###Activating the Transterpreter-plugin
 
 `Ctrl + Shift + T` activates the transterpreter-plugin.
+
 Additionally, you can go to `Packages > transterpreter-plugin > Toggle.`
 
 To open the dialog, click the transterpreter logo in the bottom right of your statusbar.
